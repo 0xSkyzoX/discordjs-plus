@@ -1,10 +1,12 @@
 import { Constants } from './constants';
-import { ListenEvents, MessageInfo, StatusType, UserInfo } from './datatypes';
+import { ListenEvents, MessageInfo, StatusType, UserInfo, ActivityType, Activities, InteractionInfo } from './datatypes';
 import WebSocket from 'ws';
 import Channel from './Client/channel';
 import Guild from './Client/guild';
 import { EmbedInfo } from './datatypes';
 import Message from './Client/Message';
+import Interactions from './Client/Interactions/interactions';
+
 const webSocket = new WebSocket(Constants.GATEWAY);
 
 interface PresenceData {
@@ -27,7 +29,13 @@ export default class Discord {
           this.guild = new Guild(token)
      }
 
-     presence(status: StatusType, { activities: [{ name, type }] }) {
+     /**
+      * changing bot presence and customize it as you want
+      * @param status client online action
+      * @param activities customize bot activity
+      */
+
+     presence(status: StatusType, { activities: [{ name, type }] }: Activities) {
           InitPresenceData.status = status
           InitPresenceData.activities = [{ name: name, type: type }]
      }
@@ -51,6 +59,11 @@ export default class Discord {
                console.log(err)
           }
      }
+
+     /**
+      * important to make the bot online
+      * @param ready params contain client bot information
+      */
 
      public async connect(ready: (client: UserInfo) => void) {
           webSocket.on('open', () => {
@@ -89,7 +102,6 @@ export default class Discord {
       * @param type Event
       */
      listen(type: ListenEvents, paramsEvent: (params_event) => void) {
-
           webSocket.addEventListener("message", async (e) => {
                const data = JSON.parse(e.data.toString())
                if (type == "Message_Create") {
@@ -98,9 +110,17 @@ export default class Discord {
                          const message = new Message(this.token, _message)
                          await message.client.getClientData()
                          paramsEvent(message)
-                         console.log(data)
                     }
                }
+               
+                    if (type == "Interaction_Create") {
+                    if (data.t == "INTERACTION_CREATE") {
+                         const _data: InteractionInfo = data.d
+                         const interaction = new Interactions(this.token, _data, webSocket)
+                         paramsEvent(interaction)
+                    }
+               }
+               
           })
 
           webSocket.on('error', (error) => {
@@ -170,6 +190,12 @@ export default class Discord {
                console.log(err)
           }
      }
+     /**
+      * sending embed mesasge to a specific channel
+      * @param channel_id message embed channel
+      * @param embed informations JSON
+      * @returns 
+      */
      public async sendEmbed(channel_id: string, embed: EmbedInfo) {
           if (!embed) return console.log("Invalid Embed JSON")
           try {
@@ -188,16 +214,12 @@ export default class Discord {
                console.log(err)
           }
      }
+     /**
+      * Discord function
+      * @param function 
+      */
      public FC(fun: () => void) {
           fun()
      }
 }
 
-export enum ActivityType {
-     Game = 0,
-     Streaming = 1,
-     Listening = 2,
-     Watching = 3,
-     Custom = 4,
-     Competing = 5
-}

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Intents = exports.ChannelType = void 0;
+exports.ActivityType = exports.Intents = exports.ChannelType = void 0;
 var ChannelType;
 (function (ChannelType) {
     ChannelType[ChannelType["GUILD_TEXT"] = 0] = "GUILD_TEXT";
@@ -38,4 +38,13 @@ var Intents;
     Intents[Intents["AUTO_MODERATION_CONFIGURATION"] = 1048576] = "AUTO_MODERATION_CONFIGURATION";
     Intents[Intents["AUTO_MODERATION_EXECUTION"] = 2097152] = "AUTO_MODERATION_EXECUTION";
 })(Intents = exports.Intents || (exports.Intents = {}));
+var ActivityType;
+(function (ActivityType) {
+    ActivityType[ActivityType["Game"] = 0] = "Game";
+    ActivityType[ActivityType["Streaming"] = 1] = "Streaming";
+    ActivityType[ActivityType["Listening"] = 2] = "Listening";
+    ActivityType[ActivityType["Watching"] = 3] = "Watching";
+    ActivityType[ActivityType["Custom"] = 4] = "Custom";
+    ActivityType[ActivityType["Competing"] = 5] = "Competing";
+})(ActivityType = exports.ActivityType || (exports.ActivityType = {}));
 //# sourceMappingURL=datatypes.js.map

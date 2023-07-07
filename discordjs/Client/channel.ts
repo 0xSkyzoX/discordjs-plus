@@ -1,16 +1,30 @@
 import { Constants } from "../constants";
+import { ChannelInfo, ChannelType } from "../datatypes";
 
-export default class Channel {
+export default class Channel implements ChannelInfo {
      private token: string;
-     
-     constructor(token: string) {
+     channel_id: string
+     id: string;
+     flags: number;
+     guild_id: string;
+     rate_limit_per_user: string;
+     last_message_id: string;
+     parent_id: string;
+     permission_overwrites: any[];
+     position: number;
+     topic?: string;
+     type: ChannelType;
+     name: string;
+     nsfw: boolean;
+     constructor(token: string, channel_id: string= "") {
           this.token = token
+          this.channel_id = channel_id
      }
-     public async get(channel_id: string) {
-          if (!channel_id) return console.log("Invalid Channel ID, GET")
+     public async get() {
+          if (!this.channel_id) return console.log("Invalid Channel ID, GET")
           
           try {
-               const response = await fetch(`${Constants.API_BASE}/channels/${channel_id}`, {
+               const response = await fetch(`${Constants.API_BASE}/channels/${this.channel_id}`, {
                     method: "GET",
                     headers: {
                          "Content-Type": "application/json",
@@ -27,11 +41,11 @@ export default class Channel {
                console.log(err)
           }
      }
-     public async getMessages(channel_id : string) {
-          if (!channel_id) return console.log("Invalid Channel ID, GET")
+     public async getMessages() {
+          if (!this.channel_id) return console.log("Invalid Channel ID, GET")
           
           try {
-               const response = await fetch(`${Constants.API_BASE}/channels/${channel_id}/messages`, {
+               const response = await fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
                     method: "GET",
                     headers: {
                          "Content-Type": "application/json",
@@ -44,6 +58,28 @@ export default class Channel {
                } else {
                     console.log("ERR ", response.status)
                }
+          } catch(err) {
+               console.log(err)
+          }
+     }
+     public send(data: any) {
+          if (!data) return console.log("invalid data send interaction")
+          try {
+               fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
+                    method: "POST",
+                    headers: {
+                         "Content-Type": "application/json",
+                         "Authorization": `Bot ${this.token}`
+                    },
+                    body: JSON.stringify(data)
+               }).then((res) => {
+                    if (!res.ok) {
+                         
+                              console.log("Faild send Interaction Reply Message")
+                         
+                    }
+               })
+               
           } catch(err) {
                console.log(err)
           }

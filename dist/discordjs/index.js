@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActivityType = void 0;
 const constants_1 = require("./constants");
 const ws_1 = __importDefault(require("ws"));
 const channel_1 = __importDefault(require("./Client/channel"));
 const guild_1 = __importDefault(require("./Client/guild"));
 const Message_1 = __importDefault(require("./Client/Message"));
+const interactions_1 = __importDefault(require("./Client/Interactions/interactions"));
 const webSocket = new ws_1.default(constants_1.Constants.GATEWAY);
 var InitPresenceData = {
     activities: [{ name: "", type: 0 }],
@@ -29,6 +29,11 @@ class Discord {
         this.channel = new channel_1.default(token);
         this.guild = new guild_1.default(token);
     }
+    /**
+     * changing bot presence and customize it as you want
+     * @param status client online action
+     * @param activities customize bot activity
+     */
     presence(status, { activities: [{ name, type }] }) {
         InitPresenceData.status = status;
         InitPresenceData.activities = [{ name: name, type: type }];
@@ -56,6 +61,10 @@ class Discord {
             }
         });
     }
+    /**
+     * important to make the bot online
+     * @param ready params contain client bot information
+     */
     connect(ready) {
         return __awaiter(this, void 0, void 0, function* () {
             webSocket.on('open', () => {
@@ -101,7 +110,13 @@ class Discord {
                     const message = new Message_1.default(this.token, _message);
                     yield message.client.getClientData();
                     paramsEvent(message);
-                    console.log(data);
+                }
+            }
+            if (type == "Interaction_Create") {
+                if (data.t == "INTERACTION_CREATE") {
+                    const _data = data.d;
+                    const interaction = new interactions_1.default(this.token, _data, webSocket);
+                    paramsEvent(interaction);
                 }
             }
         }));
@@ -176,6 +191,12 @@ class Discord {
             }
         });
     }
+    /**
+     * sending embed mesasge to a specific channel
+     * @param channel_id message embed channel
+     * @param embed informations JSON
+     * @returns
+     */
     sendEmbed(channel_id, embed) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!embed)
@@ -198,18 +219,13 @@ class Discord {
             }
         });
     }
+    /**
+     * Discord function
+     * @param function
+     */
     FC(fun) {
         fun();
     }
 }
 exports.default = Discord;
-var ActivityType;
-(function (ActivityType) {
-    ActivityType[ActivityType["Game"] = 0] = "Game";
-    ActivityType[ActivityType["Streaming"] = 1] = "Streaming";
-    ActivityType[ActivityType["Listening"] = 2] = "Listening";
-    ActivityType[ActivityType["Watching"] = 3] = "Watching";
-    ActivityType[ActivityType["Custom"] = 4] = "Custom";
-    ActivityType[ActivityType["Competing"] = 5] = "Competing";
-})(ActivityType = exports.ActivityType || (exports.ActivityType = {}));
 //# sourceMappingURL=index.js.map

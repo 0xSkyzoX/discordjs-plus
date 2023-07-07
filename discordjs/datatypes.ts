@@ -1,5 +1,3 @@
-import { ActivityType } from ".";
-
 export type MessageEmbed = {
      title?: string;
      type?: "rich" | "image" | "video" | "gifv" | "article" | "link";
@@ -8,6 +6,46 @@ export type MessageEmbed = {
      timestamp?: Date;
      color?: number;
 };
+
+export type MemberInfo = {
+     user: UserInfo;
+     unusual_dm_activity_util: any;
+     roles: string[];
+     premium_since: any;
+     permissions: string;
+     pending: boolean;
+     nick: any;
+     mute: boolean;
+     joined_at: string;
+     flags: number;
+     deaf: boolean;
+     communication_disabled_until: any;
+     avatar: string;
+}
+
+export type InteractionData = {
+     type: number;
+     name: string;
+     id: string
+}
+
+export type InteractionInfo = {
+     version: number;
+     type: number;
+     token: string;
+     member: MemberInfo;
+     locale: string;
+     id: string;
+     guild_locale: string;
+     guild: { locale: string, id: string, features: string[] };
+     entitlements: string[];
+     entitlement_sku_ids: string[];
+     data: InteractionData;
+     channel_id: string;
+     channel: ChannelInfo;
+     application_id: string;
+     app_permissions: string;
+}
 
 export type MessageReference = {
      message_id?: string;
@@ -217,4 +255,17 @@ export type PresenceInfo = {
      status: StatusType
 }
 
-export type ListenEvents = "Message_Create" | "Message_Remove" | "Message_Update" | "Voice_Update" | "Voice_Delete" | "Channel_Create" | "Channel_Remove" | "Channel_Update"  
+export type ListenEvents = "Message_Create" | "Message_Remove" | "Message_Update" | "Voice_Update" | "Voice_Delete" | "Channel_Create" | "Channel_Remove" | "Channel_Update" | "Interaction_Create"
+
+export enum ActivityType {
+     Game = 0,
+     Streaming = 1,
+     Listening = 2,
+     Watching = 3,
+     Custom = 4,
+     Competing = 5
+}
+
+export interface Activities {
+     activities: [{ name: string, type: ActivityType }]
+}

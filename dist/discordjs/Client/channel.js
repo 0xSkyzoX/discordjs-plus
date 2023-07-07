@@ -11,15 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 class Channel {
-    constructor(token) {
+    constructor(token, channel_id = "") {
         this.token = token;
+        this.channel_id = channel_id;
     }
-    get(channel_id) {
+    get() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!channel_id)
+            if (!this.channel_id)
                 return console.log("Invalid Channel ID, GET");
             try {
-                const response = yield fetch(`${constants_1.Constants.API_BASE}/channels/${channel_id}`, {
+                const response = yield fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -39,12 +40,12 @@ class Channel {
             }
         });
     }
-    getMessages(channel_id) {
+    getMessages() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!channel_id)
+            if (!this.channel_id)
                 return console.log("Invalid Channel ID, GET");
             try {
-                const response = yield fetch(`${constants_1.Constants.API_BASE}/channels/${channel_id}/messages`, {
+                const response = yield fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -63,6 +64,27 @@ class Channel {
                 console.log(err);
             }
         });
+    }
+    send(data) {
+        if (!data)
+            return console.log("invalid data send interaction");
+        try {
+            fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bot ${this.token}`
+                },
+                body: JSON.stringify(data)
+            }).then((res) => {
+                if (!res.ok) {
+                    console.log("Faild send Interaction Reply Message");
+                }
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 exports.default = Channel;
