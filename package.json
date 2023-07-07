@@ -1,0 +1,24 @@
+{
+  "name": "discord-botjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/src/index.ts",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./dist/src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/ws": "^8.5.5",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "ws": "^8.13.0"
+  }
+}

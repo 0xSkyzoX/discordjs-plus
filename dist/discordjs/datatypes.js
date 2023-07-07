@@ -1,0 +1,41 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Intents = exports.ChannelType = void 0;
+var ChannelType;
+(function (ChannelType) {
+    ChannelType[ChannelType["GUILD_TEXT"] = 0] = "GUILD_TEXT";
+    ChannelType[ChannelType["DM"] = 1] = "DM";
+    ChannelType[ChannelType["GUILD_VOICE"] = 2] = "GUILD_VOICE";
+    ChannelType[ChannelType["GROUP_DM"] = 3] = "GROUP_DM";
+    ChannelType[ChannelType["GUILD_CATEGORY"] = 4] = "GUILD_CATEGORY";
+    ChannelType[ChannelType["GUILD_ANNOUNCEMENT"] = 5] = "GUILD_ANNOUNCEMENT";
+    ChannelType[ChannelType["ANNOUNCEMENT_THREAD"] = 10] = "ANNOUNCEMENT_THREAD";
+    ChannelType[ChannelType["PUBLIC_THREAD"] = 11] = "PUBLIC_THREAD";
+    ChannelType[ChannelType["PRIVATE_THREAD"] = 12] = "PRIVATE_THREAD";
+    ChannelType[ChannelType["GUILD_STAGE_VOICE"] = 13] = "GUILD_STAGE_VOICE";
+    ChannelType[ChannelType["GUILD_DIRECTORY"] = 14] = "GUILD_DIRECTORY";
+    ChannelType[ChannelType["GUILD_FORUM"] = 15] = "GUILD_FORUM";
+})(ChannelType = exports.ChannelType || (exports.ChannelType = {}));
+var Intents;
+(function (Intents) {
+    Intents[Intents["GUILDS"] = 1] = "GUILDS";
+    Intents[Intents["GUILD_MEMBERS"] = 2] = "GUILD_MEMBERS";
+    Intents[Intents["GUILD_MODERATION"] = 4] = "GUILD_MODERATION";
+    Intents[Intents["GUILD_EMOJIS_AND_STICKERS"] = 8] = "GUILD_EMOJIS_AND_STICKERS";
+    Intents[Intents["GUILD_INTEGRATIONS"] = 16] = "GUILD_INTEGRATIONS";
+    Intents[Intents["GUILD_WEBHOOKS"] = 32] = "GUILD_WEBHOOKS";
+    Intents[Intents["GUILD_INVITES"] = 64] = "GUILD_INVITES";
+    Intents[Intents["GUILD_VOICE_STATES"] = 128] = "GUILD_VOICE_STATES";
+    Intents[Intents["GUILD_PRESENCES"] = 256] = "GUILD_PRESENCES";
+    Intents[Intents["GUILD_MESSAGES"] = 512] = "GUILD_MESSAGES";
+    Intents[Intents["GUILD_MESSAGE_REACTIONS"] = 1024] = "GUILD_MESSAGE_REACTIONS";
+    Intents[Intents["GUILD_MESSAGE_TYPING"] = 2048] = "GUILD_MESSAGE_TYPING";
+    Intents[Intents["DIRECT_MESSAGES"] = 4096] = "DIRECT_MESSAGES";
+    Intents[Intents["DIRECT_MESSAGE_REACTIONS"] = 8192] = "DIRECT_MESSAGE_REACTIONS";
+    Intents[Intents["DIRECT_MESSAGE_TYPING"] = 16384] = "DIRECT_MESSAGE_TYPING";
+    Intents[Intents["MESSAGE_CONTENT"] = 32768] = "MESSAGE_CONTENT";
+    Intents[Intents["GUILD_SCHEDULED_EVENTS"] = 65536] = "GUILD_SCHEDULED_EVENTS";
+    Intents[Intents["AUTO_MODERATION_CONFIGURATION"] = 1048576] = "AUTO_MODERATION_CONFIGURATION";
+    Intents[Intents["AUTO_MODERATION_EXECUTION"] = 2097152] = "AUTO_MODERATION_EXECUTION";
+})(Intents = exports.Intents || (exports.Intents = {}));
+//# sourceMappingURL=datatypes.js.map
