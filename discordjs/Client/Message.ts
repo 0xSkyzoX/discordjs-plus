@@ -1,6 +1,8 @@
 import { Constants } from '../constants';
 import { MessageInfo, MessageEmbed, UserInfo } from '../datatypes';
+import Channel from './channel';
 import Client from './client';
+import Guild from './guild';
 
 export default class Message implements MessageInfo {
      private token: string;
@@ -20,6 +22,8 @@ export default class Message implements MessageInfo {
      mention_everyone?: boolean;
      pinned?: boolean;
      client: Client;
+     channel: Channel;
+     guild: Guild;
      constructor(token: string, data: MessageInfo) {
           this.token = token;
           this.id = data.id;
@@ -36,6 +40,8 @@ export default class Message implements MessageInfo {
           this.embeds = data.embeds;
           this.content = data.content;
           this.client = new Client(token)
+          this.channel = new Channel(token, data.channel_id)
+          this.guild = new Guild(token, this.channel.guild_id)
      }
      public async send(content: string) {
           if (!content) return console.log("Invalid Message Send Content!")

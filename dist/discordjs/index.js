@@ -27,7 +27,7 @@ class Discord {
     constructor(token) {
         this.token = token;
         this.channel = new channel_1.default(token);
-        this.guild = new guild_1.default(token);
+        this.guild = new guild_1.default(token, this.channel.guild_id);
     }
     /**
      * changing bot presence and customize it as you want

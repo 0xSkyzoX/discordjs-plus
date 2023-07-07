@@ -11,20 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 class Guild {
-    constructor(token) {
+    constructor(token, guild_id) {
         this.token = token;
-        this.channels = new Channels(token);
+        this.channels = new Channels(token, guild_id);
+        this.guild_id = guild_id;
     }
 }
 exports.default = Guild;
 class Channels {
-    constructor(token) {
+    constructor(token, guild_id) {
         this.token = token;
+        this.guild_id = guild_id;
     }
-    all(guild_id) {
+    all() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield fetch(`${constants_1.Constants.API_BASE}/guilds/${guild_id}/channels`, {
+                const response = yield fetch(`${constants_1.Constants.API_BASE}/guilds/${this.guild_id}/channels`, {
                     method: "GET",
                     headers: {
                         'Authorization': `Bot ${this.token}`,

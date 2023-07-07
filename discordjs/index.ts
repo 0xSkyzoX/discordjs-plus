@@ -26,7 +26,7 @@ export default class Discord {
      constructor(token: string) {
           this.token = token
           this.channel = new Channel(token);
-          this.guild = new Guild(token)
+          this.guild = new Guild(token, this.channel.guild_id)
      }
 
      /**
@@ -121,7 +121,6 @@ export default class Discord {
                          paramsEvent(interaction)
                     }
                }
-               
           })
 
           webSocket.on('error', (error) => {

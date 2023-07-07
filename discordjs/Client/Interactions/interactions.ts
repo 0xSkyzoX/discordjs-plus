@@ -2,6 +2,7 @@ import { Constants } from "../../constants";
 import { ChannelInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../datatypes";
 import Channel from "../channel";
 import WebSocket from 'ws';
+import Guild from "../guild";
 
 export default class Interactions implements InteractionInfo {
      private _authtoken: string;
@@ -20,6 +21,7 @@ export default class Interactions implements InteractionInfo {
      token: string;
      locale: string;
      channel: Channel;
+     guilds: Guild
      private webSocket: WebSocket
      constructor(token: string, data: InteractionInfo, webSocket: WebSocket) {
           this._authtoken = token;
@@ -38,7 +40,8 @@ export default class Interactions implements InteractionInfo {
           this.token = data.token
           this.locale = data.locale
           this.channel = new Channel(token, this.channel_id)
-          this.webSocket = webSocket
+          this.webSocket = webSocket;
+          this.guilds = new Guild(token, data.guild.id)
      }
      public send(data: InteractionResponse) {
           if (!data) return console.log("invalid data")

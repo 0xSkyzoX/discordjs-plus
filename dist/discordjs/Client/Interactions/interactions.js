@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../../constants");
 const channel_1 = __importDefault(require("../channel"));
+const guild_1 = __importDefault(require("../guild"));
 class Interactions {
     constructor(token, data, webSocket) {
         this._authtoken = token;
@@ -24,6 +25,7 @@ class Interactions {
         this.locale = data.locale;
         this.channel = new channel_1.default(token, this.channel_id);
         this.webSocket = webSocket;
+        this.guilds = new guild_1.default(token, data.guild.id);
     }
     send(data) {
         if (!data)

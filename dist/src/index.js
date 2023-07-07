@@ -22,20 +22,22 @@ const discord = new index_1.default(TOKEN);
 discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, function* () {
     if (message.author.bot)
         return;
+    const guild = message.guild.channels.all();
     if (message.content == "Hello") {
         message.send("yo yo");
         message.react("👍");
+        console.log(guild);
     }
 }));
 discord.listen("Interaction_Create", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (interaction.data.name == "help") {
-        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "Hello World" } });
+        interaction.send({ type: 4, data: { content: "Hello World" } });
         interaction.channel.send({ content: "Hello, " + interaction.member.user.username });
     }
 }));
 // Discord.js FC (function)
 discord.FC(() => __awaiter(void 0, void 0, void 0, function* () {
-    discord.presence("idle", { activities: [{ name: "discord.js plus", type: datatypes_1.ActivityType.Listening }] });
+    discord.presence("online", { activities: [{ name: "discord.js plus", type: datatypes_1.ActivityType.Listening }] });
 }));
 // Discord connect, to Websocket Gateway
 discord.connect((client) => {
