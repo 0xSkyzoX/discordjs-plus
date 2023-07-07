@@ -23,14 +23,14 @@ discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, 
     if (message.author.bot)
         return;
     if (message.content == "Hello") {
-        message.send("Hey world, " + message.client.username);
+        message.send("yo yo");
         message.react("👍");
     }
 }));
 discord.listen("Interaction_Create", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (interaction.data.name == "help") {
-        interaction.channel.send({ content: "Hello" });
-        interaction.reply("Yo  yo yo");
+        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "Hello World" } });
+        interaction.channel.send({ content: "Hello, " + interaction.member.user.username });
     }
 }));
 // Discord.js FC (function)

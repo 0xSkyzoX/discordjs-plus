@@ -25,15 +25,17 @@ class Interactions {
         this.channel = new channel_1.default(token, this.channel_id);
         this.webSocket = webSocket;
     }
-    reply(data) {
+    send(data) {
         if (!data)
             return console.log("invalid data");
         try {
+            console.log("id: ", this.id);
+            console.log("token: ", this.token);
             fetch(`${constants_1.Constants.API_BASE}/interactions/${this.id}/${this.token}/callback`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bot ${this._authtoken}`
+                    "Authorization": `Bot ${this.token}`
                 },
                 body: JSON.stringify(data)
             }).then((res) => {

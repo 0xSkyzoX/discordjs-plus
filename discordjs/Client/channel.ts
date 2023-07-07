@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { ChannelInfo, ChannelType } from "../datatypes";
+import { ChannelInfo, ChannelType, InteractionResponse, MessageSend } from "../datatypes";
 
 export default class Channel implements ChannelInfo {
      private token: string;
@@ -62,11 +62,13 @@ export default class Channel implements ChannelInfo {
                console.log(err)
           }
      }
-     public send(data: any) {
-          if (!data) return console.log("invalid data send interaction")
+     public send(data: MessageSend) {
+          if (!data) return console.log("invalid data")
           try {
+               console.log("id: ", this.id)
+               console.log("token: ", this.token)
                fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
-                    method: "POST",
+                    method:  "POST",
                     headers: {
                          "Content-Type": "application/json",
                          "Authorization": `Bot ${this.token}`
@@ -74,13 +76,10 @@ export default class Channel implements ChannelInfo {
                     body: JSON.stringify(data)
                }).then((res) => {
                     if (!res.ok) {
-                         
-                              console.log("Faild send Interaction Reply Message")
-                         
+                         console.log("ERR ",res.status)
                     }
                })
-               
-          } catch(err) {
+          } catch (err) {
                console.log(err)
           }
      }

@@ -1,5 +1,5 @@
 import { Constants } from "../../constants";
-import { ChannelInfo, InteractionData, InteractionInfo, MemberInfo } from "../../datatypes";
+import { ChannelInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../datatypes";
 import Channel from "../channel";
 import WebSocket from 'ws';
 
@@ -40,14 +40,16 @@ export default class Interactions implements InteractionInfo {
           this.channel = new Channel(token, this.channel_id)
           this.webSocket = webSocket
      }
-     public reply(data) {
+     public send(data: InteractionResponse) {
           if (!data) return console.log("invalid data")
           try {
+               console.log("id: ", this.id)
+               console.log("token: ", this.token)
                fetch(`${Constants.API_BASE}/interactions/${this.id}/${this.token}/callback`, {
                     method:  "POST",
                     headers: {
                          "Content-Type": "application/json",
-                         "Authorization": `Bot ${this._authtoken}`
+                         "Authorization": `Bot ${this.token}`
                     },
                     body: JSON.stringify(data)
                }).then((res) => {

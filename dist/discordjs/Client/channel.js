@@ -67,8 +67,10 @@ class Channel {
     }
     send(data) {
         if (!data)
-            return console.log("invalid data send interaction");
+            return console.log("invalid data");
         try {
+            console.log("id: ", this.id);
+            console.log("token: ", this.token);
             fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages`, {
                 method: "POST",
                 headers: {
@@ -78,7 +80,7 @@ class Channel {
                 body: JSON.stringify(data)
             }).then((res) => {
                 if (!res.ok) {
-                    console.log("Faild send Interaction Reply Message");
+                    console.log("ERR ", res.status);
                 }
             });
         }

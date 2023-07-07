@@ -269,3 +269,24 @@ export enum ActivityType {
 export interface Activities {
      activities: [{ name: string, type: ActivityType }]
 }
+export enum InteractionTypeResponse {
+     PONG=1,
+     CHANNEL_MESSAGE_WITH_SOURCE=4,
+     DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE=5,
+     DEFERRED_UPDATE_MESSAGE=6,
+     UPDATE_MESSAGE=7,
+     APPLICATION_COMMAND_AUTOCOMPLETE_RESULT=8,
+     MODAL=9
+}
+
+export type MessageSend = {
+     tts?: boolean,
+     content?: string,
+     embeds?: EmbedInfo[],
+     flags?: number,
+}
+
+export type InteractionResponse = {
+     type: InteractionTypeResponse,
+     data: MessageSend
+}

@@ -115,6 +115,7 @@ class Discord {
             if (type == "Interaction_Create") {
                 if (data.t == "INTERACTION_CREATE") {
                     const _data = data.d;
+                    console.log(data);
                     const interaction = new interactions_1.default(this.token, _data, webSocket);
                     paramsEvent(interaction);
                 }

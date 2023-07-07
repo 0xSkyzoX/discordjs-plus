@@ -116,6 +116,7 @@ export default class Discord {
                     if (type == "Interaction_Create") {
                     if (data.t == "INTERACTION_CREATE") {
                          const _data: InteractionInfo = data.d
+                         console.log(data)
                          const interaction = new Interactions(this.token, _data, webSocket)
                          paramsEvent(interaction)
                     }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActivityType = exports.Intents = exports.ChannelType = void 0;
+exports.InteractionTypeResponse = exports.ActivityType = exports.Intents = exports.ChannelType = void 0;
 var ChannelType;
 (function (ChannelType) {
     ChannelType[ChannelType["GUILD_TEXT"] = 0] = "GUILD_TEXT";
@@ -47,4 +47,14 @@ var ActivityType;
     ActivityType[ActivityType["Custom"] = 4] = "Custom";
     ActivityType[ActivityType["Competing"] = 5] = "Competing";
 })(ActivityType = exports.ActivityType || (exports.ActivityType = {}));
+var InteractionTypeResponse;
+(function (InteractionTypeResponse) {
+    InteractionTypeResponse[InteractionTypeResponse["PONG"] = 1] = "PONG";
+    InteractionTypeResponse[InteractionTypeResponse["CHANNEL_MESSAGE_WITH_SOURCE"] = 4] = "CHANNEL_MESSAGE_WITH_SOURCE";
+    InteractionTypeResponse[InteractionTypeResponse["DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE"] = 5] = "DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE";
+    InteractionTypeResponse[InteractionTypeResponse["DEFERRED_UPDATE_MESSAGE"] = 6] = "DEFERRED_UPDATE_MESSAGE";
+    InteractionTypeResponse[InteractionTypeResponse["UPDATE_MESSAGE"] = 7] = "UPDATE_MESSAGE";
+    InteractionTypeResponse[InteractionTypeResponse["APPLICATION_COMMAND_AUTOCOMPLETE_RESULT"] = 8] = "APPLICATION_COMMAND_AUTOCOMPLETE_RESULT";
+    InteractionTypeResponse[InteractionTypeResponse["MODAL"] = 9] = "MODAL";
+})(InteractionTypeResponse = exports.InteractionTypeResponse || (exports.InteractionTypeResponse = {}));
 //# sourceMappingURL=datatypes.js.map
