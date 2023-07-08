@@ -84,7 +84,7 @@ class Discord {
                     },
                 };
                 webSocket.send(JSON.stringify(identificationPayload));
-                const heartbeatInterval = 1000 * 30; // Every 30 seconds
+                const heartbeatInterval = 1000 * 25; // send hearbeat in every 25 seconds
                 setInterval(() => {
                     const heartbeatPayload = {
                         op: 1,
@@ -115,7 +115,7 @@ class Discord {
             if (type == "Interaction_Create") {
                 if (data.t == "INTERACTION_CREATE") {
                     const _data = data.d;
-                    console.log(data);
+                    console.log(_data.data.options);
                     const interaction = new interactions_1.default(this.token, _data, webSocket);
                     paramsEvent(interaction);
                 }

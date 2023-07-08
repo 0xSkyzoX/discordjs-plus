@@ -1,5 +1,5 @@
 import { Constants } from '../constants';
-import { MessageInfo, MessageEmbed, UserInfo } from '../datatypes';
+import { MessageInfo, MessageEmbed, UserInfo, MessageSend, EmbedInfo, EmbedAuthor } from '../datatypes';
 import Channel from './channel';
 import Client from './client';
 import Guild from './guild';
@@ -23,7 +23,8 @@ export default class Message implements MessageInfo {
      pinned?: boolean;
      client: Client;
      channel: Channel;
-     guild: Guild;
+     guilds: Guild;
+     guild_id: string;
      constructor(token: string, data: MessageInfo) {
           this.token = token;
           this.id = data.id;
@@ -40,30 +41,27 @@ export default class Message implements MessageInfo {
           this.embeds = data.embeds;
           this.content = data.content;
           this.client = new Client(token)
-          this.channel = new Channel(token, data.channel_id)
-          this.guild = new Guild(token, this.channel.guild_id)
+          this.channel = new Channel(token, this.channel_id)
+          this.guilds = new Guild(token, data.guild_id)
+          this.guild_id = data.guild_id
      }
-     public async send(content: string) {
-          if (!content) return console.log("Invalid Message Send Content!")
+     
+     public reply(data?: {content?: string, embeds?: EmbedInfo}) {
           try {
-               const response = await fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
+               fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
                     method: "POST",
                     headers: {
                          "Content-Type": "application/json",
                          "Authorization": `Bot ${this.token}`
                     },
-                    body: JSON.stringify({ content: content })
+                    body: JSON.stringify({...data, message_reference: {message_id: this.id,
+                         channel_id: this.channel_id}})
                })
-               const data = await response.json()
-               if (!response.ok) {
-                    console.log("ERR ", response.status)
-               } else {
-                    console.log("Data Message: ", data)
-               }
-          } catch (err) {
+          } catch(err) {
                console.log(err)
           }
      }
+
      /**
       * add react to a response message
       * @param reaction 

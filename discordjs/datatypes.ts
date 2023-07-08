@@ -26,7 +26,8 @@ export type MemberInfo = {
 export type InteractionData = {
      type: number;
      name: string;
-     id: string
+     id: string;
+     options?: string[]
 }
 
 export type InteractionInfo = {
@@ -81,6 +82,7 @@ export type MessageInfo = {
      referenced_message?: string;
      mention_everyone?: boolean;
      pinned?: boolean;
+     guild_id: string;
 };
 
 export enum ChannelType {
@@ -279,11 +281,14 @@ export enum InteractionTypeResponse {
      MODAL=9
 }
 
-export type MessageSend = {
-     tts?: boolean,
-     content?: string,
-     embeds?: EmbedInfo[],
-     flags?: number,
+export interface MessageSend  {
+     tts?: boolean;
+     content?: string;
+     embeds?: EmbedInfo[];
+     flags?: number;
+     allowed_mentions?: {
+          replied_user: boolean;
+     }
 }
 
 export type InteractionResponse = {

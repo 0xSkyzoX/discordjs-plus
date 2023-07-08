@@ -1,5 +1,5 @@
 import { Constants } from "../../constants";
-import { ChannelInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../datatypes";
+import { EmbedInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../datatypes";
 import Channel from "../channel";
 import WebSocket from 'ws';
 import Guild from "../guild";
@@ -46,13 +46,11 @@ export default class Interactions implements InteractionInfo {
      public send(data: InteractionResponse) {
           if (!data) return console.log("invalid data")
           try {
-               console.log("id: ", this.id)
-               console.log("token: ", this.token)
                fetch(`${Constants.API_BASE}/interactions/${this.id}/${this.token}/callback`, {
                     method:  "POST",
                     headers: {
                          "Content-Type": "application/json",
-                         "Authorization": `Bot ${this.token}`
+                         "Authorization": `Bot ${this._authtoken}`
                     },
                     body: JSON.stringify(data)
                }).then((res) => {
@@ -64,5 +62,26 @@ export default class Interactions implements InteractionInfo {
                console.log(err)
           }
      }
-
+     // public reply(data: InteractionResponse) {
+     //      if (!data) return console.log("invalid data")
+     //      try {
+     //           fetch(`${Constants.API_BASE}/interactions/${this.id}/${this.token}/callback`, {
+     //                method:  "POST",
+     //                headers: {
+     //                     "Content-Type": "application/json",
+     //                     "Authorization": `Bot ${this._authtoken}`
+     //                },
+     //                body: JSON.stringify({type: data.type, data: {content: data.data.content, message_reference: {
+     //                     message_id: this.data.id,
+     //                     channel_id: this.channel_id
+     //                   },}})
+     //           }).then((res) => {
+     //                if (!res.ok) {
+     //                     console.log("ERR ",res.status)
+     //                }
+     //           })
+     //      } catch (err) {
+     //           console.log(err)
+     //      }
+     // }
 }

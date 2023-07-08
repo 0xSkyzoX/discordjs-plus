@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { ChannelInfo, ChannelType, InteractionResponse, MessageSend } from "../datatypes";
+import { ChannelInfo, ChannelType, MessageSend } from "../datatypes";
 
 export default class Channel implements ChannelInfo {
      private token: string;
@@ -65,8 +65,6 @@ export default class Channel implements ChannelInfo {
      public send(data: MessageSend) {
           if (!data) return console.log("invalid data")
           try {
-               console.log("id: ", this.id)
-               console.log("token: ", this.token)
                fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages`, {
                     method:  "POST",
                     headers: {

@@ -33,34 +33,25 @@ class Message {
         this.embeds = data.embeds;
         this.content = data.content;
         this.client = new client_1.default(token);
-        this.channel = new channel_1.default(token, data.channel_id);
-        this.guild = new guild_1.default(token, this.channel.guild_id);
+        this.channel = new channel_1.default(token, this.channel_id);
+        this.guilds = new guild_1.default(token, data.guild_id);
+        this.guild_id = data.guild_id;
     }
-    send(content) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!content)
-                return console.log("Invalid Message Send Content!");
-            try {
-                const response = yield fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bot ${this.token}`
-                    },
-                    body: JSON.stringify({ content: content })
-                });
-                const data = yield response.json();
-                if (!response.ok) {
-                    console.log("ERR ", response.status);
-                }
-                else {
-                    console.log("Data Message: ", data);
-                }
-            }
-            catch (err) {
-                console.log(err);
-            }
-        });
+    reply(data) {
+        try {
+            fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bot ${this.token}`
+                },
+                body: JSON.stringify(Object.assign(Object.assign({}, data), { message_reference: { message_id: this.id,
+                        channel_id: this.channel_id } }))
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
     /**
      * add react to a response message

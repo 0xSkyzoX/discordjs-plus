@@ -12,17 +12,15 @@ const discord = new Discord(TOKEN)
 
 discord.listen("Message_Create", async (message: Message) => {
      if (message.author.bot) return;
-     const guild = message.guild.channels.all()
      if (message.content == "Hello") {
-          message.send("yo yo")
+          message.channel.send({content: "Hello G"})
           message.react("👍")
-          console.log(guild)
      }
 })
 
 discord.listen("Interaction_Create", async (interaction: Interactions) => {
      if (interaction.data.name == "help") {
-          interaction.send({type: 4, data: {content: "Hello World"}})
+          interaction.reply({type: 4, data: {content: "yo yo yo"}})
           interaction.channel.send({content: "Hello, "+ interaction.member.user.username})
      }
 })

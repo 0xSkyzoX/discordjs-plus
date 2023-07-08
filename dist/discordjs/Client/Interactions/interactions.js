@@ -31,13 +31,11 @@ class Interactions {
         if (!data)
             return console.log("invalid data");
         try {
-            console.log("id: ", this.id);
-            console.log("token: ", this.token);
             fetch(`${constants_1.Constants.API_BASE}/interactions/${this.id}/${this.token}/callback`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bot ${this.token}`
+                    "Authorization": `Bot ${this._authtoken}`
                 },
                 body: JSON.stringify(data)
             }).then((res) => {
