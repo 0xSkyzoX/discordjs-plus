@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { UserInfo } from "../datatypes";
+import { MessageInfo, UserInfo } from "../datatypes";
 
 export default class Client implements UserInfo {
      private token: string
@@ -11,8 +11,10 @@ export default class Client implements UserInfo {
      avatar: string;
      avatar_decoration: string;
      discriminator: string;
-     constructor(token: string) {
+     private sendInfo: MessageInfo
+     constructor(token: string, sendInfos: MessageInfo) {
           this.token = token
+          this.sendInfo = sendInfos
      }
      public async getClientData() {
           try {
@@ -37,6 +39,23 @@ export default class Client implements UserInfo {
                } else {
                     console.log("ERR", response.status)
                }
+          } catch(err) {
+               console.log(err)
+          }
+     }
+     public deleteMessage() {
+          try {
+               fetch(`${Constants.API_BASE}/channels/${this.sendInfo.channel_id}/messages/${this.sendInfo.id}`, {
+                    method: "DELETE",
+                    headers: {
+                         "Authorization": `Bot ${this.token}`,
+                         "Content-Type": "application/json"
+                    }
+               }).then((res) => {
+                    if (!res.ok) {
+                         console.log("ERR, ", res.status)
+                    }
+               })
           } catch(err) {
                console.log(err)
           }

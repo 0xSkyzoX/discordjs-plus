@@ -18,6 +18,7 @@ const channel_1 = __importDefault(require("./Client/channel"));
 const guild_1 = __importDefault(require("./Client/guild"));
 const Message_1 = __importDefault(require("./Client/Message"));
 const interactions_1 = __importDefault(require("./Client/Interactions/interactions"));
+const client_1 = __importDefault(require("./Applications/client"));
 const webSocket = new ws_1.default(constants_1.Constants.GATEWAY);
 var InitPresenceData = {
     activities: [{ name: "", type: 0 }],
@@ -28,6 +29,7 @@ class Discord {
         this.token = token;
         this.channel = new channel_1.default(token);
         this.guild = new guild_1.default(token, this.channel.guild_id);
+        this.client_interaction = new client_1.default(token);
     }
     /**
      * changing bot presence and customize it as you want

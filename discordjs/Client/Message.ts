@@ -25,6 +25,7 @@ export default class Message implements MessageInfo {
      channel: Channel;
      guilds: Guild;
      guild_id: string;
+     messageSended: MessageInfo;
      constructor(token: string, data: MessageInfo) {
           this.token = token;
           this.id = data.id;
@@ -40,7 +41,7 @@ export default class Message implements MessageInfo {
           this.tts = data.tts;
           this.embeds = data.embeds;
           this.content = data.content;
-          this.client = new Client(token)
+          this.client = new Client(token, this.messageSended)
           this.channel = new Channel(token, this.channel_id)
           this.guilds = new Guild(token, data.guild_id)
           this.guild_id = data.guild_id
@@ -56,6 +57,10 @@ export default class Message implements MessageInfo {
                     },
                     body: JSON.stringify({...data, message_reference: {message_id: this.id,
                          channel_id: this.channel_id}})
+               }).then((res) => {
+                    return res.json()
+               }).then((data: MessageInfo) => {
+                    return this.messageSended = data
                })
           } catch(err) {
                console.log(err)
@@ -83,5 +88,5 @@ export default class Message implements MessageInfo {
                console.log(err)
           }
      }
-
+     
 }

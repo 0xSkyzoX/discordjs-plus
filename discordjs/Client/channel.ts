@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { ChannelInfo, ChannelType, MessageSend } from "../datatypes";
+import { ChannelInfo, ChannelType, MessageInfo, MessageSend } from "../datatypes";
 
 export default class Channel implements ChannelInfo {
      private token: string;
@@ -78,6 +78,26 @@ export default class Channel implements ChannelInfo {
                     }
                })
           } catch (err) {
+               console.log(err)
+          }
+     }
+     public async bulkDelete(length: number ) {
+          const messages: MessageInfo[] = await this.getMessages() 
+          const messagesIDS = messages.slice(0, length).map((msg) => (msg.id as unknown) as number)
+          try {
+               fetch(`${Constants.API_BASE}/channels/${this.channel_id}/messages/bulk-delete`, {
+                    method: "POST",
+                    headers: {
+                         "Content-Type":"application/json",
+                         "Authorization": `Bot ${this.token}`
+                    },
+                    body: JSON.stringify({messages: messagesIDS})
+               }).then((res) => {
+                    if (!res.ok) {
+                         console.log("ERR, ", res.status)
+                    }
+               })
+          } catch(err) {
                console.log(err)
           }
      }

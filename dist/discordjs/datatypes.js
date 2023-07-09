@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InteractionTypeResponse = exports.ActivityType = exports.Intents = exports.ChannelType = void 0;
+exports.OptionsType = exports.InteractionTypeResponse = exports.ActivityType = exports.Intents = exports.ChannelType = void 0;
 var ChannelType;
 (function (ChannelType) {
     ChannelType[ChannelType["GUILD_TEXT"] = 0] = "GUILD_TEXT";
@@ -57,4 +57,18 @@ var InteractionTypeResponse;
     InteractionTypeResponse[InteractionTypeResponse["APPLICATION_COMMAND_AUTOCOMPLETE_RESULT"] = 8] = "APPLICATION_COMMAND_AUTOCOMPLETE_RESULT";
     InteractionTypeResponse[InteractionTypeResponse["MODAL"] = 9] = "MODAL";
 })(InteractionTypeResponse = exports.InteractionTypeResponse || (exports.InteractionTypeResponse = {}));
+var OptionsType;
+(function (OptionsType) {
+    OptionsType[OptionsType["SUB_COMMAND"] = 1] = "SUB_COMMAND";
+    OptionsType[OptionsType["SUB_COMMAND_GROUP"] = 2] = "SUB_COMMAND_GROUP";
+    OptionsType[OptionsType["STRING"] = 3] = "STRING";
+    OptionsType[OptionsType["INTEGER"] = 4] = "INTEGER";
+    OptionsType[OptionsType["BOOLEAN"] = 5] = "BOOLEAN";
+    OptionsType[OptionsType["USER"] = 6] = "USER";
+    OptionsType[OptionsType["CHANNEL"] = 7] = "CHANNEL";
+    OptionsType[OptionsType["ROLE"] = 8] = "ROLE";
+    OptionsType[OptionsType["MENTIONABLE"] = 9] = "MENTIONABLE";
+    OptionsType[OptionsType["NUMBER"] = 10] = "NUMBER";
+    OptionsType[OptionsType["ATTACHMENT"] = 11] = "ATTACHMENT";
+})(OptionsType = exports.OptionsType || (exports.OptionsType = {}));
 //# sourceMappingURL=datatypes.js.map

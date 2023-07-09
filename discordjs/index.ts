@@ -6,6 +6,7 @@ import Guild from './Client/guild';
 import { EmbedInfo } from './datatypes';
 import Message from './Client/Message';
 import Interactions from './Client/Interactions/interactions';
+import ClientInteraction from './Applications/client';
 
 const webSocket = new WebSocket(Constants.GATEWAY);
 
@@ -23,10 +24,12 @@ export default class Discord {
      messageSendData: MessageInfo;
      channel: Channel;
      guild: Guild;
+     client_interaction: ClientInteraction
      constructor(token: string) {
           this.token = token
           this.channel = new Channel(token);
           this.guild = new Guild(token, this.channel.guild_id)
+          this.client_interaction = new ClientInteraction(token)
      }
 
      /**
@@ -112,7 +115,7 @@ export default class Discord {
                          paramsEvent(message)
                     }
                }
-                    if (type == "Interaction_Create") {
+               if (type == "Interaction_Create") {
                     if (data.t == "INTERACTION_CREATE") {
                          const _data: InteractionInfo = data.d
                          console.log(_data.data.options)

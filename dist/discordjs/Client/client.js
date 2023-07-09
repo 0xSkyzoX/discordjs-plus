@@ -11,8 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 class Client {
-    constructor(token) {
+    constructor(token, sendInfos) {
         this.token = token;
+        this.sendInfo = sendInfos;
     }
     getClientData() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -43,6 +44,24 @@ class Client {
                 console.log(err);
             }
         });
+    }
+    deleteMessage() {
+        try {
+            fetch(`${constants_1.Constants.API_BASE}/channels/${this.sendInfo.channel_id}/messages/${this.sendInfo.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bot ${this.token}`,
+                    "Content-Type": "application/json"
+                }
+            }).then((res) => {
+                if (!res.ok) {
+                    console.log("ERR, ", res.status);
+                }
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 }
 exports.default = Client;

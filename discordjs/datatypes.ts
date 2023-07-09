@@ -295,3 +295,41 @@ export type InteractionResponse = {
      type: InteractionTypeResponse,
      data: MessageSend
 }
+
+export type ApplicationsTypes = "GLOBAL" | "GUILD"
+
+export enum OptionsType {
+     SUB_COMMAND=1,
+     SUB_COMMAND_GROUP=2,
+     STRING=3,
+     INTEGER=4,
+     BOOLEAN=5,
+     USER=6,
+     CHANNEL=7,
+     ROLE=8,
+     MENTIONABLE= 9,
+     NUMBER=10,
+     ATTACHMENT= 11
+}
+export type RegisterApplicationInfo = {
+     name: string;
+     description?: string;
+     name_localizations?: string;
+     description_localizations?: string;
+     options?: [{
+          name: string, 
+          description?: string,
+          type: OptionsType,
+          required?: boolean,
+          choices?: [{name: string, value: string,
+               name_localizations?: string
+          }],
+          options?: [{
+               name: string;
+               description?: string;
+               type: OptionsType,
+               required?: boolean 
+          }]
+          channel_types?: ChannelType
+     }]
+}

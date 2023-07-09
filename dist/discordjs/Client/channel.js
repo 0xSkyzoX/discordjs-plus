@@ -86,6 +86,29 @@ class Channel {
             console.log(err);
         }
     }
+    bulkDelete(length) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const messages = yield this.getMessages();
+            const messagesIDS = messages.slice(0, length).map((msg) => msg.id);
+            try {
+                fetch(`${constants_1.Constants.API_BASE}/channels/${this.channel_id}/messages/bulk-delete`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bot ${this.token}`
+                    },
+                    body: JSON.stringify({ messages: messagesIDS })
+                }).then((res) => {
+                    if (!res.ok) {
+                        console.log("ERR, ", res.status);
+                    }
+                });
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    }
 }
 exports.default = Channel;
 //# sourceMappingURL=channel.js.map

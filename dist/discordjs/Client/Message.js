@@ -32,7 +32,7 @@ class Message {
         this.tts = data.tts;
         this.embeds = data.embeds;
         this.content = data.content;
-        this.client = new client_1.default(token);
+        this.client = new client_1.default(token, this.messageSended);
         this.channel = new channel_1.default(token, this.channel_id);
         this.guilds = new guild_1.default(token, data.guild_id);
         this.guild_id = data.guild_id;
@@ -47,6 +47,10 @@ class Message {
                 },
                 body: JSON.stringify(Object.assign(Object.assign({}, data), { message_reference: { message_id: this.id,
                         channel_id: this.channel_id } }))
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                return this.messageSended = data;
             });
         }
         catch (err) {
