@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config()
 import Message from '../discordjs/Client/Message';
-import { ActivityType, ApplicationsTypes, InteractionTypeResponse, OptionsType } from '../discordjs/datatypes';
+import { ActivityType, ApplicationsTypes, InteractionTypeResponse, OptionsType, Role } from '../discordjs/datatypes';
 import Interactions from "../discordjs/Client/Interactions/interactions";
 import Discord from "../discordjs"
 
@@ -34,7 +34,7 @@ discord.listen("Message_Create", async (message: Message) => {
           }
           message.reply({content: "Yo yo"})
           message.react("👍")
-          message.channel.bulkDelete(4)
+          message.channel.bulkDelete(argsNUM)
      }
 })
 

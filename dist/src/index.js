@@ -43,7 +43,7 @@ discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, 
         }
         message.reply({ content: "Yo yo" });
         message.react("👍");
-        message.channel.bulkDelete(4);
+        message.channel.bulkDelete(argsNUM);
     }
 }));
 discord.listen("Interaction_Create", (interaction) => __awaiter(void 0, void 0, void 0, function* () {

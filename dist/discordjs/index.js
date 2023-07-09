@@ -99,6 +99,28 @@ class Discord {
             ready(clientInfos);
         });
     }
+    fetchMember(message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!message)
+                return console.log("Invalid Message Data");
+            try {
+                const response = yield fetch(`${constants_1.Constants.API_BASE}/guilds/${message.guild_id}/members/${message.author.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bot ${this.token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                const data = yield response.json();
+                if (response.ok) {
+                    return data;
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    }
     /**
      * listening to event
      * @param type Event

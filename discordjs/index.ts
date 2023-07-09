@@ -1,5 +1,5 @@
 import { Constants } from './constants';
-import { ListenEvents, MessageInfo, StatusType, UserInfo, ActivityType, Activities, InteractionInfo } from './datatypes';
+import { ListenEvents, MessageInfo, StatusType, UserInfo, ActivityType, Activities, InteractionInfo, MemberInfo } from './datatypes';
 import WebSocket from 'ws';
 import Channel from './Client/channel';
 import Guild from './Client/guild';
@@ -98,6 +98,25 @@ export default class Discord {
           const clientInfos = await this.getClient()
 
           ready(clientInfos)
+     }
+
+     private async fetchMember(message: MessageInfo) {
+          if (!message) return console.log("Invalid Message Data")
+          try {
+               const response = await fetch(`${Constants.API_BASE}/guilds/${message.guild_id}/members/${message.author.id}`, {
+                    method: "GET",
+                    headers: {
+                         "Authorization": `Bot ${this.token}`,
+                         "Content-Type": "application/json"
+                    }
+               })
+               const data: MemberInfo = await response.json()
+               if (response.ok) {
+                    return data
+               }
+          } catch(err) {
+               console.log(err)
+          }
      }
 
      /**
