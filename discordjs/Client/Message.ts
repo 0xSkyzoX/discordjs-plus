@@ -1,5 +1,6 @@
 import { Constants } from '../constants';
 import { MessageInfo, MessageEmbed, UserInfo, MessageSend, EmbedInfo, EmbedAuthor } from '../datatypes';
+import Author from './author';
 import Channel from './channel';
 import Client from './client';
 import Guild from './guild';
@@ -10,7 +11,7 @@ export default class Message implements MessageInfo {
      type?: number;
      content: string;
      channel_id?: string;
-     author?: UserInfo;
+     author?: Author;
      tts?: boolean;
      embeds?: MessageEmbed[];
      timestamp?: Date;
@@ -30,7 +31,7 @@ export default class Message implements MessageInfo {
           this.token = token;
           this.id = data.id;
           this.type = data.type;
-          this.author = data.author;
+          this.author = new Author(token, data.author);
           this.components = data.components;
           this.flags = data.flags;
           this.channel_id = data.channel_id;

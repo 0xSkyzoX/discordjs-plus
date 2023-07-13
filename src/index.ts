@@ -38,9 +38,18 @@ discord.listen("Message_Create", async (message: Message) => {
      }
 })
 
+discord.listen("Message_Create", (message: Message) => {
+     if (message.author.bot) return;
+     if (message.content === "212") {
+          message.reply({content: "Hello Mate!"})
+          discord.sendEmbed(message.channel_id, {title: "Hello World", description: "This is a Discord Bot!", color: 0xfff, author: {name: message.author.global_name, icon_url: message.author.avatarURL()}})
+          console.log(message.author.avatar)
+     }
+} )
+
 discord.listen("Interaction_Create", async (interaction: Interactions) => {
      if (interaction.data.name == "help") {
-          interaction.send({type: InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: {content: "Hello World"}})
+          interaction.send({type: InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: {content: "Hello"}})
           interaction.channel.send({content: "Hello, "+ interaction.member.user.username})
      }
 })

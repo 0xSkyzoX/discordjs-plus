@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
+const author_1 = __importDefault(require("./author"));
 const channel_1 = __importDefault(require("./channel"));
 const client_1 = __importDefault(require("./client"));
 const guild_1 = __importDefault(require("./guild"));
@@ -21,7 +22,7 @@ class Message {
         this.token = token;
         this.id = data.id;
         this.type = data.type;
-        this.author = data.author;
+        this.author = new author_1.default(token, data.author);
         this.components = data.components;
         this.flags = data.flags;
         this.channel_id = data.channel_id;

@@ -46,9 +46,18 @@ discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, 
         message.channel.bulkDelete(argsNUM);
     }
 }));
+discord.listen("Message_Create", (message) => {
+    if (message.author.bot)
+        return;
+    if (message.content === "212") {
+        message.reply({ content: "Hello Mate!" });
+        discord.sendEmbed(message.channel_id, { title: "Hello World", description: "This is a Discord Bot!", color: 0xfff, author: { name: message.author.global_name, icon_url: message.author.avatarURL() } });
+        console.log(message.author.avatar);
+    }
+});
 discord.listen("Interaction_Create", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (interaction.data.name == "help") {
-        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "Hello World" } });
+        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "Hello" } });
         interaction.channel.send({ content: "Hello, " + interaction.member.user.username });
     }
 }));
