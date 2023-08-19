@@ -15,7 +15,7 @@ var ChannelType;
     ChannelType[ChannelType["GUILD_STAGE_VOICE"] = 13] = "GUILD_STAGE_VOICE";
     ChannelType[ChannelType["GUILD_DIRECTORY"] = 14] = "GUILD_DIRECTORY";
     ChannelType[ChannelType["GUILD_FORUM"] = 15] = "GUILD_FORUM";
-})(ChannelType = exports.ChannelType || (exports.ChannelType = {}));
+})(ChannelType || (exports.ChannelType = ChannelType = {}));
 var Intents;
 (function (Intents) {
     Intents[Intents["GUILDS"] = 1] = "GUILDS";
@@ -37,7 +37,7 @@ var Intents;
     Intents[Intents["GUILD_SCHEDULED_EVENTS"] = 65536] = "GUILD_SCHEDULED_EVENTS";
     Intents[Intents["AUTO_MODERATION_CONFIGURATION"] = 1048576] = "AUTO_MODERATION_CONFIGURATION";
     Intents[Intents["AUTO_MODERATION_EXECUTION"] = 2097152] = "AUTO_MODERATION_EXECUTION";
-})(Intents = exports.Intents || (exports.Intents = {}));
+})(Intents || (exports.Intents = Intents = {}));
 var ActivityType;
 (function (ActivityType) {
     ActivityType[ActivityType["Game"] = 0] = "Game";
@@ -46,7 +46,7 @@ var ActivityType;
     ActivityType[ActivityType["Watching"] = 3] = "Watching";
     ActivityType[ActivityType["Custom"] = 4] = "Custom";
     ActivityType[ActivityType["Competing"] = 5] = "Competing";
-})(ActivityType = exports.ActivityType || (exports.ActivityType = {}));
+})(ActivityType || (exports.ActivityType = ActivityType = {}));
 var InteractionTypeResponse;
 (function (InteractionTypeResponse) {
     InteractionTypeResponse[InteractionTypeResponse["PONG"] = 1] = "PONG";
@@ -56,7 +56,7 @@ var InteractionTypeResponse;
     InteractionTypeResponse[InteractionTypeResponse["UPDATE_MESSAGE"] = 7] = "UPDATE_MESSAGE";
     InteractionTypeResponse[InteractionTypeResponse["APPLICATION_COMMAND_AUTOCOMPLETE_RESULT"] = 8] = "APPLICATION_COMMAND_AUTOCOMPLETE_RESULT";
     InteractionTypeResponse[InteractionTypeResponse["MODAL"] = 9] = "MODAL";
-})(InteractionTypeResponse = exports.InteractionTypeResponse || (exports.InteractionTypeResponse = {}));
+})(InteractionTypeResponse || (exports.InteractionTypeResponse = InteractionTypeResponse = {}));
 var OptionsType;
 (function (OptionsType) {
     OptionsType[OptionsType["SUB_COMMAND"] = 1] = "SUB_COMMAND";
@@ -70,5 +70,5 @@ var OptionsType;
     OptionsType[OptionsType["MENTIONABLE"] = 9] = "MENTIONABLE";
     OptionsType[OptionsType["NUMBER"] = 10] = "NUMBER";
     OptionsType[OptionsType["ATTACHMENT"] = 11] = "ATTACHMENT";
-})(OptionsType = exports.OptionsType || (exports.OptionsType = {}));
+})(OptionsType || (exports.OptionsType = OptionsType = {}));
 //# sourceMappingURL=datatypes.js.map

@@ -8,12 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
+const Messages_1 = __importDefault(require("./Messages"));
 class Channel {
     constructor(token, channel_id = "") {
         this.token = token;
         this.channel_id = channel_id;
+        this.messages = new Messages_1.default(token, channel_id);
     }
     get() {
         return __awaiter(this, void 0, void 0, function* () {

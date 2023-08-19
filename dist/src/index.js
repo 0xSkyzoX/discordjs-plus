@@ -26,7 +26,18 @@ class Test {
         console.log(this.text);
     }
 }
-// Discord event listener function
+// Discord event listener function-
+discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, function* () {
+    if (message.author.bot)
+        return;
+    if (message.content === 'reactions') {
+        console.log((yield message.channel.messages.get()).reverse().map((message) => {
+            if (message.reactions) {
+                return message.reactions[0].count;
+            }
+        }));
+    }
+}));
 discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, function* () {
     if (message.author.bot)
         return;

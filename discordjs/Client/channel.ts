@@ -1,5 +1,6 @@
 import { Constants } from "../constants";
 import { ChannelInfo, ChannelType, MessageInfo, MessageSend } from "../datatypes";
+import Messages from "./Messages";
 
 export default class Channel implements ChannelInfo {
      private token: string;
@@ -16,9 +17,11 @@ export default class Channel implements ChannelInfo {
      type: ChannelType;
      name: string;
      nsfw: boolean;
+     messages: Messages
      constructor(token: string, channel_id: string= "") {
           this.token = token
           this.channel_id = channel_id
+          this.messages = new Messages(token, channel_id)
      }
      public async get() {
           if (!this.channel_id) return console.log("Invalid Channel ID, GET")
