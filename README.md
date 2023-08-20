@@ -1,4 +1,4 @@
-# DISCORDJS PLUS
+# MONSCORDJS
 
 This project is API Discord Handler, for making discord.js bot.
 You can use this project for your bot development and feel free to contribute with us.
