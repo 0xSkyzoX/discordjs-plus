@@ -14,28 +14,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const datatypes_1 = require("../discordjs/datatypes");
+const datatypes_1 = require("../discordjs/@types/datatypes");
 const discordjs_1 = __importDefault(require("../discordjs"));
 const TOKEN = process.env.TOKEN;
 const discord = new discordjs_1.default(TOKEN);
-class Test {
-    constructor(text) {
-        this.text = text;
-    }
-    print() {
-        console.log(this.text);
-    }
-}
-// Discord event listener function-
+// Discord event listener function
 discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     if (message.author.bot)
         return;
     if (message.content === 'reactions') {
-        console.log((yield message.channel.messages.get()).reverse().map((message) => {
-            if (message.reactions) {
-                return message.reactions[0].count;
-            }
-        }));
+        var messages = [];
+        const messages_1 = (yield message.channel.messages.get()).map((message) => {
+            return { message_id: message.id, reactions: message.reactions, content: message.content };
+        }).filter((item) => item.reactions !== undefined);
+        const message_2 = (yield message.channel.messages.before((_a = messages_1[0]) === null || _a === void 0 ? void 0 : _a.message_id)).reverse().map((message) => {
+            return { message_id: message.id, reactions: message.reactions, content: message.content };
+        }).filter((item) => item.reactions !== undefined);
+        messages.push(...messages_1, ...message_2);
+        console.log(messages);
+        console.log((yield message.channel.messages.before((_b = messages_1[0]) === null || _b === void 0 ? void 0 : _b.message_id)).map((message) => message.content));
     }
 }));
 discord.listen("Message_Create", (message) => __awaiter(void 0, void 0, void 0, function* () {
@@ -68,13 +66,12 @@ discord.listen("Message_Create", (message) => {
 });
 discord.listen("Interaction_Create", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (interaction.data.name == "help") {
-        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: "Hello" } });
-        interaction.channel.send({ content: "Hello, " + interaction.member.user.username });
+        interaction.send({ type: datatypes_1.InteractionTypeResponse.CHANNEL_MESSAGE_WITH_SOURCE, data: { embeds: [{ title: 'Hello' }] } });
     }
 }));
 // Discord.js FC (function)
 discord.FC(() => __awaiter(void 0, void 0, void 0, function* () {
-    discord.presence("online", { activities: [{ name: "discord.js plus", type: datatypes_1.ActivityType.Listening }] });
+    discord.presence("idle", { activities: [{ name: "discord.js plus", type: datatypes_1.ActivityType.Listening }] });
     discord.client_interaction.setApplicationId("1076585679687008326");
     yield discord.client_interaction.registerSlashcommand("GLOBAL", { name: 'hello', description: 'Your command description', options: [{ name: "your", type: datatypes_1.OptionsType.STRING, description: "the best code" }] });
 }));

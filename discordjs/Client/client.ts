@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { MessageInfo, UserInfo } from "../datatypes";
+import { MessageInfo, UserInfo } from "../@types/datatypes";
 
 export default class Client implements UserInfo {
      private token: string

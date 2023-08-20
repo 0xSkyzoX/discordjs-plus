@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { ChannelInfo, ChannelType, MessageInfo, MessageSend } from "../datatypes";
+import { ChannelInfo, ChannelType, MessageInfo, MessageSend } from "../@types/datatypes";
 import Messages from "./Messages";
 
 export default class Channel implements ChannelInfo {

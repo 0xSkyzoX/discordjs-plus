@@ -1,5 +1,5 @@
 import { Constants } from "../../constants";
-import { EmbedInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../datatypes";
+import { EmbedInfo, InteractionData, InteractionInfo, InteractionResponse, MemberInfo } from "../../@types/datatypes";
 import Channel from "../channel";
 import WebSocket from 'ws';
 import Guild from "../guild";

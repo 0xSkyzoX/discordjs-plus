@@ -1,5 +1,5 @@
 import { Constants } from '../constants';
-import { MessageInfo, MessageEmbed, UserInfo, MessageSend, EmbedInfo, EmbedAuthor } from '../datatypes';
+import { MessageInfo, MessageEmbed, UserInfo, MessageSend, EmbedInfo, EmbedAuthor } from '../@types/datatypes';
 import Author from './author';
 import Channel from './channel';
 import Client from './client';

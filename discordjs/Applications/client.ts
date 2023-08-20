@@ -1,5 +1,5 @@
 import { Constants } from "../constants";
-import { ApplicationsTypes, RegisterApplicationInfo } from "../datatypes";
+import { ApplicationsTypes, RegisterApplicationInfo } from "../@types/datatypes";
 
 export default class ClientInteraction {
      private token: string

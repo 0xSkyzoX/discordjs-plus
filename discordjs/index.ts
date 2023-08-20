@@ -1,9 +1,9 @@
 import { Constants } from './constants';
-import { ListenEvents, MessageInfo, StatusType, UserInfo, ActivityType, Activities, InteractionInfo, MemberInfo } from './datatypes';
+import { ListenEvents, MessageInfo, StatusType, UserInfo, ActivityType, Activities, InteractionInfo, MemberInfo } from './@types/datatypes';
 import WebSocket from 'ws';
 import Channel from './Client/channel';
 import Guild from './Client/guild';
-import { EmbedInfo } from './datatypes';
+import { EmbedInfo } from './@types/datatypes';
 import Message from './Client/Message';
 import Interactions from './Client/Interactions/interactions';
 import ClientInteraction from './Applications/client';
