@@ -257,7 +257,7 @@ export type PresenceInfo = {
     status: StatusType
 }
 
-export type ListenEvents = "Message_Create" | "Message_Remove" | "Message_Update" | "Voice_Update" | "Voice_Delete" | "Channel_Create" | "Channel_Remove" | "Channel_Update" | "Interaction_Create"
+export type ListenEvents = "MessageCreate" | "MessageRemove" | "MessageUpdate" | "VoiceUpdate" | "VoiceDelete" | "Channel_reate" | "ChannelRemove" | "ChannelUpdate" | "InteractionCreate"
 
 export enum ActivityType {
     Game = 0,

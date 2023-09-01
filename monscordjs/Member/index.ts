@@ -1,4 +1,4 @@
-import { MemberInfo, UserInfo } from "../datatypes";
+import { MemberInfo, UserInfo } from "../@types/datatypes";
 
 class Member implements MemberInfo {
      private token: string;

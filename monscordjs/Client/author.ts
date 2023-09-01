@@ -1,4 +1,4 @@
-import { UserInfo } from "../datatypes";
+import { UserInfo } from "../@types/datatypes";
 
 export default class Author implements UserInfo {
      username: string;

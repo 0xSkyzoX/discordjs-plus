@@ -19,6 +19,11 @@ var InitPresenceData: PresenceData = {
      status: "online"
 }
 
+type EventParamMap = {
+     "MessageCreate": Message;
+     "InteractionCreate": Interactions;
+   };
+
 export default class Discord {
      private token: string;
      messageSendData: MessageInfo;
@@ -123,10 +128,10 @@ export default class Discord {
       * listening to event
       * @param type Event
       */
-     listen(type: ListenEvents, paramsEvent: (params_event) => void) {
+     listen<T extends ListenEvents>(type: T, paramsEvent: (params_event: EventParamMap[T]) => void) {
           webSocket.addEventListener("message", async (e) => {
                const data = JSON.parse(e.data.toString())
-               if (type == "Message_Create") {
+               if (type == "MessageCreate") {
                     if (data.t == "MESSAGE_CREATE") {
                          const _message: MessageInfo = data.d
                          const message = new Message(this.token, _message)
@@ -134,7 +139,7 @@ export default class Discord {
                          paramsEvent(message)
                     }
                }
-               if (type == "Interaction_Create") {
+               if (type == "InteractionCreate") {
                     if (data.t == "INTERACTION_CREATE") {
                          const _data: InteractionInfo = data.d
                          console.log(_data.data.options)
